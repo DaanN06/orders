@@ -1,34 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Simple App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Order Manager</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            background: #f4f4f4;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #3ecf8e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h2>Store a Value</h2>
-    <input id="valueInput" placeholder="Enter something">
-    <button onclick="saveValue()">Save</button>
+    <div class="card">
+        <div id="auth-section">
+            <h3>Login</h3>
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Log In</button>
+        </div>
+
+        <div id="data-section" class="hidden">
+            <h3>Add to Orders</h3>
+            <input type="text" id="order-data" placeholder="Type something...">
+            <button onclick="addOrder()">Send to Table</button>
+            <button onclick="logout()" style="background: #ff4d4d;">Logout</button>
+            <p id="status"></p>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        const supabaseClient = supabase.createClient(
-            "https://ehkqimqvucictvwkrail.supabase.co",
-            "sb_publishable_wxpKhcAQ4NNyDAG5JvfkxA_Ofz6FMFR"
-        );
-
-        async function saveValue() {
-            const value = document.getElementById("valueInput").value;
-
-            await supabaseClient
-                .from("test")
-                .insert([{ value: value }]);
-
-            alert("Saved!");
-        }
-    </script>
+    <script src="app.js"></script>
 
 </body>
 
