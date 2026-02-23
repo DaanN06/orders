@@ -23,7 +23,7 @@
             const value = document.getElementById("valueInput").value;
 
             await supabaseClient
-                .from("values")
+                .from("test")
                 .insert([{ value: value }]);
 
             alert("Saved!");
