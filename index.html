@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple App</title>
+</head>
+
+<body>
+
+    <h2>Store a Value</h2>
+    <input id="valueInput" placeholder="Enter something">
+    <button onclick="saveValue()">Save</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const supabaseClient = supabase.createClient(
+            "https://ehkqimqvucictvwkrail.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoa3FpbXF2dWNpY3R2d2tyYWlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NzM1MDksImV4cCI6MjA4NzQ0OTUwOX0.OG5FTL-Baeu39NnsQCbpHMDOqJD4g-5cd6la6F3tPsc"
+        );
+
+        async function saveValue() {
+            const value = document.getElementById("valueInput").value;
+
+            await supabaseClient
+                .from("values")
+                .insert([{ value: value }]);
+
+            alert("Saved!");
+        }
+    </script>
+
+</body>
+
+</html>
