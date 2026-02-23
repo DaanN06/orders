@@ -4,70 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supabase Order Manager</title>
+    <title>Table Orders</title>
     <style>
         body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 2rem;
-            background: #f4f4f4;
+            font-family: system-ui;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
         }
 
         .card {
             background: white;
-            padding: 2rem;
+            padding: 20px;
+            text-align: center;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        input,
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
+        .card:hover {
             background: #3ecf8e;
             color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
         }
 
         .hidden {
             display: none;
+        }
+
+        .order-item {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background: #3ecf8e;
+            color: white;
+        }
+
+        .btn-del {
+            background: #ff4d4d;
+        }
+
+        nav {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
-        <div id="auth-section">
-            <h3>Login</h3>
-            <input type="email" id="email" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">Log In</button>
-        </div>
+    <nav>
+        <button onclick="showView('view-tables')">Dashboard</button>
+        <button onclick="loadHistory()">Order History</button>
+        <button onclick="logout()" style="background:#666">Logout</button>
+    </nav>
 
-        <div id="data-section" class="hidden">
-            <h3>Add to Orders</h3>
-            <input type="text" id="order-data" placeholder="Type something...">
-            <button onclick="addOrder()">Send to Table</button>
-            <button onclick="logout()" style="background: #ff4d4d;">Logout</button>
-            <p id="status"></p>
+    <div id="view-login">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Enter</button>
+    </div>
+
+    <div id="view-tables" class="hidden">
+        <h2>Select a Table</h2>
+        <div id="table-grid" class="grid"></div>
+    </div>
+
+    <div id="view-order" class="hidden">
+        <h2 id="current-table-title">Table X</h2>
+        <div id="menu-items" style="margin-bottom: 20px;">
         </div>
+        <hr>
+        <h3>Current Order:</h3>
+        <div id="current-items"></div>
+    </div>
+
+    <div id="view-history" class="hidden">
+        <h2>Past Orders</h2>
+        <div id="history-list"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>
-
 </body>
 
 </html>
