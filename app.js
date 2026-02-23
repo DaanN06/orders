@@ -1,6 +1,6 @@
 // REPLACE THESE WITH YOUR ACTUAL PROJECT CREDENTIALS
-const SUPABASE_URL = 'https://your-project-id.supabase.co';
-const SUPABASE_ANON_KEY = 'your-public-anon-key';
+const SUPABASE_URL = 'https://ehkqimqvucictvwkrail.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_wxpKhcAQ4NNyDAG5JvfkxA_Ofz6FMFR';
 
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
